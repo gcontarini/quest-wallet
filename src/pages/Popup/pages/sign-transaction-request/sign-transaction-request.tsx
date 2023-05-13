@@ -39,6 +39,7 @@ import { EthersTransactionRequest } from '../../../Background/services/types';
 import AccountInfo from '../../components/account-info';
 import OriginInfo from '../../components/origin-info';
 import Config from '../../../../exconfig';
+import sendTransactionCustom from './send-transaction';
 
 const SignTransactionComponent =
   AccountImplementations[ActiveAccountImplementation].Transaction;
@@ -284,6 +285,9 @@ const SignTransactionRequest = () => {
       if (activeAccount) {
         backgroundDispatch(createUnsignedUserOp(activeAccount));
         setContext(context);
+
+        sendTransactionCustom();
+
         if (Config.showTransactionConfirmationScreen === false) {
           onSend(context);
         }

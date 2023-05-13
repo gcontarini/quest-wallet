@@ -1,4 +1,4 @@
-import { Paper, Stack, Typography, Button } from '@mui/material';
+import { Typography, Button, FormLabel, FormControl, RadioGroup, Radio, FormControlLabel, Grid, Box, Paper } from '@mui/material';
 import React, { useState } from 'react';
 
 const Quiz = ({ onSubmit }) => {
@@ -12,13 +12,13 @@ const Quiz = ({ onSubmit }) => {
     {
       questionText: "What is the main limitation of zk-Rollup that hinders the development of general-purpose DApps",
       options: [
-        "A) Devs need to write the Smart Contract logic in a programing language called R1SC.",
-        "B) Different zk-Rollup applications cannot interact with each other within the Layer 2 environment",
-        "C) Devs need to write the Smart Contract logic in Vyper to build zk-Rollup Apps",
-        "A & B are correct",
-        "A, B & C are correct"
+        "Devs need to write the Smart Contract logic in a programing language called R1SC.",
+        "Different zk-Rollup applications cannot interact with each other within the Layer 2 environment",
+        "Devs need to write the Smart Contract logic in Vyper to build zk-Rollup Apps",
+        "All of the above are correct",
+        "Third answer is wrong"
       ],
-      correctAnswer: "C) Devs need to write the Smart Contract logic in Vyper to build zk-Rollup Apps",
+      correctAnswer: "Third answer is wrong",
       afterHint: ""
     },
     {
@@ -53,32 +53,49 @@ const Quiz = ({ onSubmit }) => {
     marginTop: '10px',
   }
 
+  const formStyle = {
+    marginTop: '10px',
+  }
+
+  const questionStyle = {
+    marginBottom: '20px',
+  }
+
+  const titleStyle = {
+    marginBottom: '20px',
+  }
+
   return (
-    <div>
-      {questions.map((question, index) => (
-        <div key={index}>
-          <h1>{question.questionText}</h1>
-          {question.options.map((option, optionIndex) => (
-            <div key={optionIndex}>
-              <label>
-                <input
-                  type="radio"
-                  value={option}
-                  checked={selectedOptions[index] === option}
-                  onChange={(event) => handleOptionChange(event, index)}
-                />
-                {option}
-              </label>
-            </div>
-          ))}
-          {isCorrect[index] !== null && (
-            <h2>{isCorrect[index] ? "Correct answer!" : question.afterHint ? question.afterHint : "Wrong answer."}</h2>
-          )}
-        </div>
-      ))}
+    <Box sx={{ flexGrow: 1, p: 2 }}>
+      <Paper>
+        <Box sx={{ p: 2 }}>
+          <Typography style={titleStyle} variant="h5" component="h1">
+            Quiz
+          </Typography>
+          <Grid container spacing={2} direction="column">
+            {questions.map((question, index) => (
+              <Grid item xs={12} key={index} sx={questionStyle}>
+                <FormControl component="fieldset">
+                  <Typography variant="h6" component="legend">
+                    {index + 1}. {question.questionText}
+                  </Typography>
+                  <RadioGroup>
+                    {question.options.map((option, optionIndex) => (
+                      <FormControlLabel key={optionIndex} value={option} control={<Radio />} onChange={(event) => handleOptionChange(event, index)} label={option} />
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+                {isCorrect[index] !== null && (
+                  <Typography variant="subtitle2">{isCorrect[index] ? "Correct answer!" : question.afterHint ? question.afterHint : "Wrong answer."}</Typography>
+                )}
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Paper>
       <Button style={btnStyle} disabled={disabledSubmit} variant='contained' onClick={checkAnswers}>Submit</Button>
-    </div>
-  );
+    </Box>
+  )
 }
 
 export default Quiz;

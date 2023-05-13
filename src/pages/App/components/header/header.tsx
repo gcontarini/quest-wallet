@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-import logo from '../../../../assets/img/logo.svg';
+import logo from '../../../../assets/img/icon-128.png';
 import {
   getActiveNetwork,
   getSupportedNetworks,
@@ -61,7 +61,7 @@ const Header = () => {
             id="chain-selector"
             value={activeNetwork.chainID}
             label="Chain"
-            // onChange={handleChange}
+          // onChange={handleChange}
           >
             {supportedNetworks.map((network) => (
               <MenuItem key={network.chainID} value={network.chainID}>
