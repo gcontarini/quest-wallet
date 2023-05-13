@@ -5,12 +5,12 @@ export default {
   factory_address: '0x9406Cc6185a346906296840746125a0E44976454',
   stateVersion: '0.1',
   network: {
-    chainID: '11155111',
+    chainID: '5',
     family: 'EVM',
-    name: 'Sepolia',
-    provider: 'https://sepolia.infura.io/v3/bdabe9d2f9244005af0f566398e648da',
-    entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-    bundler: 'https://sepolia.voltaire.candidewallet.com/rpc',
+    name: 'Goerli',
+    provider: 'https://goerli.blockpi.network/v1/rpc/public',
+    entryPointAddress: '0x0576a174D229E3cFA37253523E645A78A0C91B57',
+    bundler: 'https://goerli.voltaire.candidewallet.com/rpc',
     baseAsset: {
       symbol: 'ETH',
       name: 'ETH',

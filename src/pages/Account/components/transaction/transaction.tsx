@@ -9,6 +9,7 @@ import {
 import React from 'react';
 import { EthersTransactionRequest } from '../../../Background/services/provider-bridge';
 import { TransactionComponentProps } from '../types';
+import Quiz from '../quest-quiz';
 
 const Transaction = ({
   transaction,
@@ -16,37 +17,33 @@ const Transaction = ({
   onReject,
 }: TransactionComponentProps) => {
   const [loader, setLoader] = React.useState<boolean>(false);
+  const [isCorrect, setIsCorrect] = React.useState<boolean>(false);
 
+  const handleSubmit = (isCorrect) => {
+    if (isCorrect.every((answer) => answer === true)) {
+      setIsCorrect(true)
+    }
+  }
   return (
     <>
       <CardContent>
         <Typography variant="h3" gutterBottom>
-          Dummy Account Component
+          Time to quest!
         </Typography>
-        <Typography variant="body1" color="text.secondary">
-          You can show as many steps as you want in this dummy component. You
-          need to call the function <b>onComplete</b> passed as a props to this
-          component. <br />
-          <br />
-          The function takes a modifiedTransactions & context as a parameter,
-          the context will be passed to your AccountApi when creating a new
-          account. While modifiedTransactions will be agreed upon by the user.
-          <br />
-          This Component is defined in exported in{' '}
-        </Typography>
-        <Typography variant="caption">
-          trampoline/src/pages/Account/components/transaction/index.ts
-        </Typography>
+        <Quiz onSubmit={handleSubmit}></Quiz>
       </CardContent>
       <CardActions sx={{ pl: 4, pr: 4, width: '100%' }}>
         <Stack spacing={2} sx={{ width: '100%' }}>
           <Button
-            disabled={loader}
+            disabled={!isCorrect}
             size="large"
             variant="contained"
             onClick={() => {
               onComplete(transaction, undefined);
               setLoader(true);
+              setTimeout(() => {
+                setLoader(false);
+              }, 2000);
             }}
           >
             Continue
