@@ -53,10 +53,6 @@ const Quiz = ({ onSubmit }) => {
     marginTop: '10px',
   }
 
-  const formStyle = {
-    marginTop: '10px',
-  }
-
   const questionStyle = {
     marginBottom: '20px',
   }

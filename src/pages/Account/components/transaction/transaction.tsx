@@ -29,18 +29,21 @@ const Transaction = ({
   const afterSubmit = () => {
     setTimeout(() => {
       setShowTxHash(true);
-    }, 3000);
+    }, 5000);
   }
 
   return (
     <>
       <CardContent>
-        <Typography variant="h3" gutterBottom>
-          Time to quest!
-        </Typography>
         {!isCorrect ?
-          <Quiz onSubmit={handleSubmit}></Quiz> :
-          <Typography variant="body2">Congratulations! You're ready to execute your transaction.</Typography>
+          <>
+            <Typography variant="h3" gutterBottom>
+              Time to quest!
+            </Typography>
+            <Quiz onSubmit={handleSubmit}></Quiz>
+          </>
+          :
+          <Typography variant="subtitle1" gutterBottom> You're ready to execute your transaction. </Typography>
         }
       </CardContent>
       <CardActions sx={{ pl: 4, pr: 4, width: '100%' }}>
@@ -50,7 +53,7 @@ const Transaction = ({
             :
             isCorrect ?
               <Button
-                disabled={!isCorrect}
+                disabled={!isCorrect && !loader}
                 size="large"
                 variant="contained"
                 onClick={() => {
@@ -58,11 +61,15 @@ const Transaction = ({
                   afterSubmit();
                   setLoader(true);
                 }}
+                sx={{
+                  height: '32px', // set the fixed height for the button
+                  position: 'relative', // set position to relative to contain the loader
+                }}
               >
-                Send tx
-                {loader && (
+                {loader ? (
                   <CircularProgress
                     size={24}
+                    color="info"
                     sx={{
                       position: 'absolute',
                       top: '50%',
@@ -71,7 +78,7 @@ const Transaction = ({
                       marginLeft: '-12px',
                     }}
                   />
-                )}
+                ) : ("Send tx")}
               </Button>
               : null
           }

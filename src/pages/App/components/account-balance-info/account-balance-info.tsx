@@ -19,10 +19,11 @@ const AccountBalanceInfo = ({ address }: { address: string }) => {
     getAccountEVMData(state, { address, chainId: activeNetwork.chainID })
   );
 
-  const walletDeployed: boolean = useMemo(
-    () => (accountData === 'loading' ? false : accountData.accountDeployed),
-    [accountData]
-  );
+  // const walletDeployed: boolean = useMemo(
+  //   () => (accountData === 'loading' ? false : accountData.accountDeployed),
+  //   [accountData]
+  // );
+  const walletDeployed: boolean = true;
 
   const backgroundDispatch = useBackgroundDispatch();
 
@@ -68,8 +69,8 @@ const AccountBalanceInfo = ({ address }: { address: string }) => {
             accountData === 'loading'
               ? 'Loading deployment status...'
               : walletDeployed
-              ? 'Deployed'
-              : 'Not deployed'
+                ? 'Deployed'
+                : 'Not deployed'
           }
         />
       </Tooltip>
