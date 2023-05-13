@@ -1,32 +1,45 @@
-import { Paper, Stack, Typography } from '@mui/material';
+import { Paper, Stack, Typography, Button } from '@mui/material';
 import React, { useState } from 'react';
 
 const Quiz = ({ onSubmit }) => {
   const questions = [
     {
-      questionText: "What is Cardano?",
-      options: ["The moon", "Shiba Inu", "A blockchain platform", "A type of pasta"],
-      correctAnswer: "A blockchain platform"
+      questionText: "Is zk-Rollup considered a promising scaling solution for Ethereum?",
+      options: ["Yes", "No"],
+      correctAnswer: "Yes",
+      afterHint: "By bundling transactions and providing a succinct proof, ZK Rollups offer significant scalability benefits."
     },
     {
-      questionText: "Who is the founder of Cardano?",
-      options: ["Vitalik Buterin", "Charles Hoskinson", "Satoshi Nakamoto", "Elon Musk"],
-      correctAnswer: "Charles Hoskinson"
+      questionText: "What is the main limitation of zk-Rollup that hinders the development of general-purpose DApps",
+      options: [
+        "A) Devs need to write the Smart Contract logic in a programing language called R1SC.",
+        "B) Different zk-Rollup applications cannot interact with each other within the Layer 2 environment",
+        "C) Devs need to write the Smart Contract logic in Vyper to build zk-Rollup Apps",
+        "A & B are correct",
+        "A, B & C are correct"
+      ],
+      correctAnswer: "C) Devs need to write the Smart Contract logic in Vyper to build zk-Rollup Apps",
+      afterHint: ""
     },
     {
-      questionText: "What language was Cardano written in?",
-      options: ["JavaScript", "Python", "Haskell", "C++"],
-      correctAnswer: "Haskell"
-    }
+      questionText: "Scroll collaborates closely with the Ethereum Foundation to find the best way to implement the EVM circuit",
+      options: ["True", "False"],
+      correctAnswer: "True",
+      afterHint: "Scroll's zkEVM can provide the same experience for developers and users. It’s order of magnitudes cheaper without sacrificing security. "
+    },
   ];
 
   const [selectedOptions, setSelectedOptions] = useState(Array(questions.length).fill(null));
   const [isCorrect, setIsCorrect] = useState(Array(questions.length).fill(null));
+  const [disabledSubmit, setDisabledSubmit] = useState(false);
 
   const checkAnswers = () => {
     const correctAnswers = questions.map((question) => question.correctAnswer);
     const newIsCorrect = selectedOptions.map((selectedOption, index) => selectedOption === correctAnswers[index]);
     setIsCorrect(newIsCorrect);
+    if (newIsCorrect.every((answer) => answer === true)) {
+      setDisabledSubmit(true);
+    }
     onSubmit(newIsCorrect);
   }
 
@@ -37,7 +50,7 @@ const Quiz = ({ onSubmit }) => {
   }
 
   const btnStyle = {
-    'margin-top': '10px',
+    marginTop: '10px',
   }
 
   return (
@@ -59,11 +72,11 @@ const Quiz = ({ onSubmit }) => {
             </div>
           ))}
           {isCorrect[index] !== null && (
-            <h2>{isCorrect[index] ? "Correct answer!" : "Wrong answer. Try again."}</h2>
+            <h2>{isCorrect[index] ? "Correct answer!" : question.afterHint ? question.afterHint : "Wrong answer."}</h2>
           )}
         </div>
       ))}
-      <button style={btnStyle} onClick={checkAnswers}>Submit</button>
+      <Button style={btnStyle} disabled={disabledSubmit} variant='contained' onClick={checkAnswers}>Submit</Button>
     </div>
   );
 }

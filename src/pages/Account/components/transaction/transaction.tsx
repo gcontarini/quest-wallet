@@ -33,7 +33,7 @@ const Transaction = ({
         <Quiz onSubmit={handleSubmit}></Quiz>
       </CardContent>
       <CardActions sx={{ pl: 4, pr: 4, width: '100%' }}>
-        <Stack spacing={2} sx={{ width: '100%' }}>
+        <Stack spacing={2} sx={{ width: '80%' }}>
           <Button
             disabled={!isCorrect}
             size="large"
@@ -41,9 +41,6 @@ const Transaction = ({
             onClick={() => {
               onComplete(transaction, undefined);
               setLoader(true);
-              setTimeout(() => {
-                setLoader(false);
-              }, 2000);
             }}
           >
             Continue
