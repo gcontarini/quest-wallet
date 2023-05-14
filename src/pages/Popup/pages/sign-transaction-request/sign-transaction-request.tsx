@@ -286,8 +286,6 @@ const SignTransactionRequest = () => {
         backgroundDispatch(createUnsignedUserOp(activeAccount));
         setContext(context);
 
-        sendTransactionCustom();
-
         if (Config.showTransactionConfirmationScreen === false) {
           onSend(context);
         }
