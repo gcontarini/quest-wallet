@@ -2,6 +2,11 @@
 
 Trampoline is a chrome extension boilerplate code to showcase your own Smart Contract Wallets with React 18 and Webpack 5 support.
 
+## Polygon Verification
+https://mumbai.polygonscan.com/address/0x95f9d3a39e38d8109f9fd6eec63245d86649f1ad#code
+## Proof of tweet:
+https://twitter.com/itsencrypted1/status/1657548207772127232?s=20
+
 ## Installation and Running
 
 ### Steps:
