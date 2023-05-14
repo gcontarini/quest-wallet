@@ -11,12 +11,8 @@ import {
   RelayTransaction,
 } from "@safe-global/safe-core-sdk-types";
 
-const sendTransactionCustom = async () => {
+const sendTransactionCustom = async (signer: any, safeAddress: any) => {
   // https://chainlist.org
-  const RPC_URL = "https://eth-goerli.public.blastapi.io";
-  const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
-  const signer = new ethers.Wallet('00e486a5428fc378d72188158b407b7a26b06bc7450a2c0a4c459ee80471c2f7', provider);
-  const safeAddress = "0x95F9d3A39E38d8109F9fd6EEc63245d86649f1Ad"; // Safe from which the transaction will be sent
   const chainId = 5;
 
   // Any address can be used for destination. In this example, we use vitalik.eth
